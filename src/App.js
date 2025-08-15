@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import ExpenseForm from "./components/ExpenseForm";
+import ExpenseChart from "./components/ExpenseChart";
+import FinanceAdvice from "./components/FinanceAdvice";
 
-function App() {
+const SERVER_URL = "https://redesigned-umbrella-pw5xp5669w5c9p9w-5000.app.github.dev";
+
+export default function App() {
+  const [expenses, setExpenses] = useState([]);
+
+  // Fetch all expenses from the backend
+  const fetchExpenses = async () => {
+    try {
+      const res = await fetch(`${SERVER_URL}/expenses`);
+      const data = await res.json();
+      setExpenses(data);
+    } catch (err) {
+      console.error("Failed to fetch expenses:", err);
+    }
+  };
+
+  // Fetch on component mount
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Finance Tracker</h1>
+      {/* Pass fetchExpenses as callback to refresh the list */}
+      <ExpenseForm onAddExpense={fetchExpenses} />
+      <ExpenseChart expenses={expenses} />
+      <FinanceAdvice expenses={expenses} />
     </div>
   );
 }
-
-export default App;

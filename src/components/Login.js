@@ -23,7 +23,7 @@ export default function Login() {
     const data = await res.json();
 
     if (res.ok && data.token) {
-      // ✅ Store JWT token locally
+      //  Store JWT token locally
       localStorage.setItem("token", data.token);
 
       // Redirect to dashboard

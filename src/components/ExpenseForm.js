@@ -36,7 +36,7 @@ export default function ExpenseForm({ onAddExpense }) {
           amount,
           category,
           date,
-          userId: "current-user-id" // replace with actual userId if needed
+          userId: "current-user-id" 
         }),
       });
 

@@ -30,7 +30,7 @@ export default function FinanceAdvice({ expenses }) {
       <p>Total spent: {formatCurrency(totalSpent)}</p>
       <p>You're spending the most on: <strong>{maxCategory}</strong></p>
       {totalSpent > 18000 && <p>⚠️ Warning: Your spending is high! Consider saving more.</p>}
-      {totalSpent <= 18000 && <p>✅ Good job! Your spending is under control.</p>}
+      {totalSpent <= 18000 && <p> Good job! Your spending is under control.</p>}
     </div>
   );
 }
